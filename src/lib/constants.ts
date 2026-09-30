@@ -189,12 +189,17 @@ export const FONT_STACK = {
 
 export type FontFamilyId = keyof typeof FONT_STACK;
 
-// Store locale codes used for localized copy, screenshot paths and export folders.
-// Regional variants can have separate decks or share a language-root folder.
+// All 50 App Store Connect localizations, verified 2026-10-01:
+// https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations
+// Keep existing editor keys (en, es, bn, ...) to preserve copy and image paths.
+// Use APPLE_LOCALE_CODE for the corresponding App Store Connect API code.
 export const STORE_LOCALES: { code: string; label: string }[] = [
-  { code: "en", label: "English" },
+  { code: "en", label: "English (US)" },
+  { code: "en-AU", label: "English (Australia)" },
+  { code: "en-CA", label: "English (Canada)" },
   { code: "en-GB", label: "English (UK)" },
   { code: "ar", label: "العربية" },
+  { code: "bn", label: "বাংলা" },
   { code: "ca", label: "Català" },
   { code: "cs", label: "Čeština" },
   { code: "da", label: "Dansk" },
@@ -204,6 +209,8 @@ export const STORE_LOCALES: { code: string; label: string }[] = [
   { code: "es-MX", label: "Español (LatAm)" },
   { code: "fi", label: "Suomi" },
   { code: "fr", label: "Français" },
+  { code: "fr-CA", label: "Français (Canada)" },
+  { code: "gu", label: "ગુજરાતી" },
   { code: "he", label: "עברית" },
   { code: "hi", label: "हिन्दी" },
   { code: "hr", label: "Hrvatski" },
@@ -211,20 +218,29 @@ export const STORE_LOCALES: { code: string; label: string }[] = [
   { code: "id", label: "Indonesia" },
   { code: "it", label: "Italiano" },
   { code: "ja", label: "日本語" },
+  { code: "kn", label: "ಕನ್ನಡ" },
   { code: "ko", label: "한국어" },
+  { code: "ml", label: "മലയാളം" },
+  { code: "mr", label: "मराठी" },
   { code: "ms", label: "Melayu" },
   { code: "nl", label: "Nederlands" },
   { code: "no", label: "Norsk" },
+  { code: "or", label: "ଓଡ଼ିଆ" },
+  { code: "pa", label: "ਪੰਜਾਬੀ" },
   { code: "pl", label: "Polski" },
   { code: "pt-BR", label: "Português (BR)" },
   { code: "pt-PT", label: "Português (PT)" },
   { code: "ro", label: "Română" },
   { code: "ru", label: "Русский" },
   { code: "sk", label: "Slovenčina" },
+  { code: "sl", label: "Slovenščina" },
   { code: "sv", label: "Svenska" },
+  { code: "ta", label: "தமிழ்" },
+  { code: "te", label: "తెలుగు" },
   { code: "th", label: "ไทย" },
   { code: "tr", label: "Türkçe" },
   { code: "uk", label: "Українська" },
+  { code: "ur", label: "اردو" },
   { code: "vi", label: "Tiếng Việt" },
   { code: "zh-Hans", label: "简体中文" },
   { code: "zh-Hant", label: "繁體中文" },
@@ -232,4 +248,15 @@ export const STORE_LOCALES: { code: string; label: string }[] = [
 
 export const LOCALE_LABEL: Record<string, string> = Object.fromEntries(
   STORE_LOCALES.map((l) => [l.code, l.label]),
+);
+
+// Editor projects use language roots where regional separation was not needed.
+// This mapping changes neither stored text keys nor screenshot/export paths.
+export const APPLE_LOCALE_CODE: Record<string, string> = Object.fromEntries(
+  STORE_LOCALES.map(({ code }) => [code, ({
+    ar: "ar-SA", bn: "bn-BD", de: "de-DE", en: "en-US", es: "es-ES",
+    fr: "fr-FR", gu: "gu-IN", kn: "kn-IN", ml: "ml-IN", mr: "mr-IN",
+    nl: "nl-NL", or: "or-IN", pa: "pa-IN", sl: "sl-SI", ta: "ta-IN",
+    te: "te-IN", ur: "ur-PK",
+  } as Record<string, string>)[code] || code]),
 );
