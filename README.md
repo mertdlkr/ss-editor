@@ -22,9 +22,11 @@ Open http://localhost:3000. The editor runs locally and saves to this folder; a 
 - Portrait and supported tablet landscape dimensions, multiple export size presets.
 - Drag, resize, rotate, reorder, duplicate and delete; element stacking, free text, decor images and extra phone mockups.
 - Undo/redo, keyboard shortcuts, cross-device element propagation, themes and previews.
-- 36 locale choices, per-language captions and text, `{locale}` screenshot paths, language shortcuts and selective export.
+- 50 locale choices, per-language captions and text, `{locale}` screenshot paths, language shortcuts and selective export.
 - PNG exports bundled into ZIP files, grouped by platform, device, dimensions and locale.
 - Debounced JSON autosave, localStorage cache, schema migrations and per-device/all-device reset.
+
+The locale picker covers all 50 localizations in [Apple’s official list](https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations), checked on October 1, 2026. Existing editor keys such as `en`, `es` and `bn` remain unchanged for project compatibility; `APPLE_LOCALE_CODE` in `constants.ts` maps them to Apple’s API codes (`en-US`, `es-ES`, `bn-BD`, etc.).
 
 Locale support manages your copy; it does not translate it automatically. Missing text falls back to English, then the first available translation. The editor interface currently contains English and Turkish labels.
 
