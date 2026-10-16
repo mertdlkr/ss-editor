@@ -8,7 +8,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test:locales": "node scripts/test-locales.cjs",
-    "build:deck": "node build-deck.mjs"
+    "build:deck": "node build-deck.mjs",
+    "test:png": "node scripts/test-png.cjs"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",

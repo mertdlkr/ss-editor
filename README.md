@@ -77,3 +77,5 @@ This is a local, single-user authoring tool. Its filesystem APIs have no authent
 ## Origin
 
 Extracted from the standalone screenshot editor used in footballgame, originally scaffolded by the `app-store-screenshots` skill. This repository excludes that game's screenshots, pixel icons, branding, localized marketing copy, deck generator and football pitch artwork. The reusable editing and localization mechanics are retained. See [third-party notices](THIRD_PARTY_NOTICES.md).
+
+PNG exports are explicitly encoded as eight-bit RGB, without an alpha channel, to meet App Store Connect screenshot requirements. Run `npm run test:png` to verify dimensions, alpha compositing, and pixel round-trips.

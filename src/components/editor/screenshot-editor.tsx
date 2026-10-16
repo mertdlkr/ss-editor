@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import JSZip from "jszip";
+import { opaquePng } from "@/lib/png";
 import { toPng } from "html-to-image";
 import { Toaster, toast } from "sonner";
 import {
@@ -561,7 +562,7 @@ export function ScreenshotEditor() {
         cacheBust: false,
         backgroundColor: "#ffffff",
       });
-      return dataUrl;
+      return await opaquePng(dataUrl);
     } finally {
       el.style.left = prev.left || "-99999px";
       el.style.top = prev.top || "0px";
