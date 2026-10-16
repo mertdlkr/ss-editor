@@ -189,17 +189,48 @@ export const FONT_STACK = {
 
 export type FontFamilyId = keyof typeof FONT_STACK;
 
-// All 50 App Store Connect localizations, verified 2026-10-01:
+// Union of App Store Connect and Google Play listing languages. The editor
+// code remains the persistent project/screenshot-path key; each store's API
+// locale is resolved through its own map below.
+// Sources:
 // https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations
-// Keep existing editor keys (en, es, bn, ...) to preserve copy and image paths.
-// Use APPLE_LOCALE_CODE for the corresponding App Store Connect API code.
+// https://support.google.com/googleplay/android-developer/answer/9844778?hl=en
 export const STORE_LOCALES: { code: string; label: string }[] = [
+  { code: "af", label: "Afrikaans" },
+  { code: "sq", label: "Shqip" },
+  { code: "am", label: "አማርኛ" },
+  { code: "hy", label: "Հայերեն" },
+  { code: "az", label: "Azərbaycanca" },
+  { code: "eu", label: "Euskara" },
+  { code: "bg", label: "Български" },
+  { code: "my", label: "မြန်မာ" },
+  { code: "gl", label: "Galego" },
+  { code: "ka", label: "ქართული" },
+  { code: "is", label: "Íslenska" },
+  { code: "km", label: "ខ្មែរ" },
+  { code: "ky", label: "Кыргызча" },
+  { code: "lo", label: "ລາວ" },
+  { code: "mk", label: "Македонски" },
+  { code: "mn", label: "Монгол" },
+  { code: "ne", label: "नेपाली" },
+  { code: "nb", label: "Norsk bokmål" },
+  { code: "pt", label: "Português" },
+  { code: "si", label: "සිංහල" },
+  { code: "zh", label: "简体中文" },
   { code: "en", label: "English (US)" },
   { code: "en-AU", label: "English (Australia)" },
   { code: "en-CA", label: "English (Canada)" },
   { code: "en-GB", label: "English (UK)" },
+  { code: "en-IN", label: "English (India)" },
+  { code: "en-SG", label: "English (Singapore)" },
+  { code: "en-ZA", label: "English (South Africa)" },
   { code: "ar", label: "العربية" },
+  { code: "hy-AM", label: "Հայերեն" },
+  { code: "az-AZ", label: "Azərbaycanca" },
   { code: "bn", label: "বাংলা" },
+  { code: "eu-ES", label: "Euskara" },
+  { code: "be", label: "Беларуская" },
+  { code: "my-MM", label: "မြန်မာ" },
   { code: "ca", label: "Català" },
   { code: "cs", label: "Čeština" },
   { code: "da", label: "Dansk" },
@@ -207,12 +238,18 @@ export const STORE_LOCALES: { code: string; label: string }[] = [
   { code: "el", label: "Ελληνικά" },
   { code: "es", label: "Español" },
   { code: "es-MX", label: "Español (LatAm)" },
+  { code: "es-US", label: "Español (EE. UU.)" },
+  { code: "et", label: "Eesti" },
+  { code: "fil", label: "Filipino" },
   { code: "fi", label: "Suomi" },
   { code: "fr", label: "Français" },
   { code: "fr-CA", label: "Français (Canada)" },
+  { code: "gl-ES", label: "Galego" },
+  { code: "ka-GE", label: "ქართული" },
   { code: "gu", label: "ગુજરાતી" },
   { code: "he", label: "עברית" },
   { code: "hi", label: "हिन्दी" },
+  { code: "is-IS", label: "Íslenska" },
   { code: "hr", label: "Hrvatski" },
   { code: "hu", label: "Magyar" },
   { code: "id", label: "Indonesia" },
@@ -220,21 +257,39 @@ export const STORE_LOCALES: { code: string; label: string }[] = [
   { code: "ja", label: "日本語" },
   { code: "kn", label: "ಕನ್ನಡ" },
   { code: "ko", label: "한국어" },
+  { code: "kk", label: "Қазақша" },
+  { code: "km-KH", label: "ខ្មែរ" },
+  { code: "ky-KG", label: "Кыргызча" },
+  { code: "lo-LA", label: "ລາວ" },
+  { code: "lt", label: "Lietuvių" },
+  { code: "lv", label: "Latviešu" },
   { code: "ml", label: "മലയാളം" },
   { code: "mr", label: "मराठी" },
   { code: "ms", label: "Melayu" },
+  { code: "ms-MY", label: "Bahasa Melayu (Malaysia)" },
+  { code: "mk-MK", label: "Македонски" },
   { code: "nl", label: "Nederlands" },
   { code: "no", label: "Norsk" },
+  { code: "mn-MN", label: "Монгол" },
+  { code: "ne-NP", label: "नेपाली" },
   { code: "or", label: "ଓଡ଼ିଆ" },
   { code: "pa", label: "ਪੰਜਾਬੀ" },
   { code: "pl", label: "Polski" },
   { code: "pt-BR", label: "Português (BR)" },
   { code: "pt-PT", label: "Português (PT)" },
+  { code: "fa", label: "فارسی" },
+  { code: "fa-AE", label: "فارسی (امارات)" },
+  { code: "fa-AF", label: "فارسی (افغانستان)" },
+  { code: "fa-IR", label: "فارسی (ایران)" },
   { code: "ro", label: "Română" },
+  { code: "rm", label: "Rumantsch" },
   { code: "ru", label: "Русский" },
+  { code: "si-LK", label: "සිංහල" },
+  { code: "sr", label: "Српски" },
   { code: "sk", label: "Slovenčina" },
   { code: "sl", label: "Slovenščina" },
   { code: "sv", label: "Svenska" },
+  { code: "sw", label: "Kiswahili" },
   { code: "ta", label: "தமிழ்" },
   { code: "te", label: "తెలుగు" },
   { code: "th", label: "ไทย" },
@@ -244,19 +299,57 @@ export const STORE_LOCALES: { code: string; label: string }[] = [
   { code: "vi", label: "Tiếng Việt" },
   { code: "zh-Hans", label: "简体中文" },
   { code: "zh-Hant", label: "繁體中文" },
+  { code: "zh-HK", label: "繁體中文（香港）" },
 ];
 
 export const LOCALE_LABEL: Record<string, string> = Object.fromEntries(
   STORE_LOCALES.map((l) => [l.code, l.label]),
 );
 
+// The editor keys for Apple's 50 locales, retained unchanged for saved
+// projects and screenshot paths.
+const APPLE_EDITOR_LOCALES = new Set([
+  "en", "en-AU", "en-CA", "en-GB", "ar", "bn", "ca", "cs", "da", "de",
+  "el", "es", "es-MX", "fi", "fr", "fr-CA", "gu", "he", "hi", "hr",
+  "hu", "id", "it", "ja", "kn", "ko", "ml", "mr", "ms", "nl", "no",
+  "or", "pa", "pl", "pt-BR", "pt-PT", "ro", "ru", "sk", "sl", "sv",
+  "ta", "te", "th", "tr", "uk", "ur", "vi", "zh", "zh-Hans", "zh-Hant",
+]);
+
 // Editor projects use language roots where regional separation was not needed.
 // This mapping changes neither stored text keys nor screenshot/export paths.
 export const APPLE_LOCALE_CODE: Record<string, string> = Object.fromEntries(
-  STORE_LOCALES.map(({ code }) => [code, ({
+  STORE_LOCALES.filter(({ code }) => APPLE_EDITOR_LOCALES.has(code)).map(({ code }) => [code, ({
     ar: "ar-SA", bn: "bn-BD", de: "de-DE", en: "en-US", es: "es-ES",
     fr: "fr-FR", gu: "gu-IN", kn: "kn-IN", ml: "ml-IN", mr: "mr-IN",
     nl: "nl-NL", or: "or-IN", pa: "pa-IN", sl: "sl-SI", ta: "ta-IN",
-    te: "te-IN", ur: "ur-PK",
+    te: "te-IN", ur: "ur-PK", zh: "zh-Hans",
   } as Record<string, string>)[code] || code]),
 );
+
+// Google Play listing API locale codes for every currently available
+// translation. Keys intentionally reuse existing editor codes where present.
+export const GOOGLE_LOCALE_CODE: Record<string, string> = {
+  af: "af", sq: "sq", am: "am", ar: "ar", "hy-AM": "hy-AM",
+  "az-AZ": "az-AZ", bn: "bn-BD", "eu-ES": "eu-ES", be: "be",
+  "hy": "hy-AM", "az": "az-AZ", "eu": "eu-ES", bg: "bg",
+  my: "my-MM", gl: "gl-ES", ka: "ka-GE", is: "is-IS", km: "km-KH",
+  ky: "ky-KG", lo: "lo-LA", mk: "mk-MK", mn: "mn-MN", ne: "ne-NP",
+  nb: "no-NO", no: "no-NO", pt: "pt-BR", si: "si-LK", zh: "zh-CN",
+  "my-MM": "my-MM", ca: "ca", "zh-HK": "zh-HK", "zh-Hans": "zh-CN",
+  "zh-Hant": "zh-TW", hr: "hr", cs: "cs-CZ", da: "da-DK", nl: "nl-NL",
+  "en-AU": "en-AU", "en-CA": "en-CA", en: "en-US", "en-GB": "en-GB",
+  "en-IN": "en-IN", "en-SG": "en-SG", "en-ZA": "en-ZA", et: "et",
+  fil: "fil", fi: "fi-FI", "fr-CA": "fr-CA", fr: "fr-FR", "gl-ES": "gl-ES",
+  "ka-GE": "ka-GE", de: "de-DE", el: "el-GR", gu: "gu", he: "iw-IL",
+  hi: "hi-IN", hu: "hu-HU", "is-IS": "is-IS", id: "id", it: "it-IT",
+  ja: "ja-JP", kn: "kn-IN", kk: "kk", "km-KH": "km-KH", ko: "ko-KR",
+  "ky-KG": "ky-KG", "lo-LA": "lo-LA", lv: "lv", lt: "lt", "mk-MK": "mk-MK",
+  "ms-MY": "ms-MY", ms: "ms", ml: "ml-IN", mr: "mr-IN", "mn-MN": "mn-MN",
+  "ne-NP": "ne-NP", fa: "fa", "fa-AE": "fa-AE",
+  "fa-AF": "fa-AF", "fa-IR": "fa-IR", pl: "pl-PL", "pt-BR": "pt-BR",
+  "pt-PT": "pt-PT", pa: "pa", ro: "ro", rm: "rm", ru: "ru-RU", sk: "sk",
+  sl: "sl", "es-MX": "es-419", "es-US": "es-US", es: "es-ES", sr: "sr",
+  "si-LK": "si-LK", sw: "sw", sv: "sv-SE", ta: "ta-IN", te: "te-IN",
+  th: "th", tr: "tr-TR", uk: "uk", ur: "ur", vi: "vi",
+};

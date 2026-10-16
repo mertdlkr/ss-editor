@@ -22,11 +22,11 @@ Open http://localhost:3000. The editor runs locally and saves to this folder; a 
 - Portrait and supported tablet landscape dimensions, multiple export size presets.
 - Drag, resize, rotate, reorder, duplicate and delete; element stacking, free text, decor images and extra phone mockups.
 - Undo/redo, keyboard shortcuts, cross-device element propagation, themes and previews.
-- 50 locale choices, per-language captions and text, `{locale}` screenshot paths, language shortcuts and selective export.
+- 104 editor locale keys covering all 50 App Store Connect localizations and all 86 Google Play store-listing locales, with per-language captions and text, `{locale}` screenshot paths, language shortcuts and selective export.
 - PNG exports bundled into ZIP files, grouped by platform, device, dimensions and locale.
 - Debounced JSON autosave, localStorage cache, schema migrations and per-device/all-device reset.
 
-The locale picker covers all 50 localizations in [Apple’s official list](https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations), checked on October 1, 2026. Existing editor keys such as `en`, `es` and `bn` remain unchanged for project compatibility; `APPLE_LOCALE_CODE` in `constants.ts` maps them to Apple’s API codes (`en-US`, `es-ES`, `bn-BD`, etc.).
+The locale picker combines Apple’s [50 App Store Connect localizations](https://developer.apple.com/help/app-store-connect/reference/app-information/app-store-localizations) with the [86 Google Play listing locales](https://support.google.com/googleplay/android-developer/answer/9844778?hl=en) (the Google language list includes regional variants). `STORE_LOCALES` keeps editor/project and screenshot-path keys; `APPLE_LOCALE_CODE` and `GOOGLE_LOCALE_CODE` translate those keys to platform codes. Existing keys stay intact, including aliases such as `no`/`nb` and `zh`/`zh-Hant`. Apple’s 50 distinct platform targets are represented by 51 editor keys because `zh` is retained as an alias of `zh-Hans`. Google-only targets are left out of the Apple map, and Apple-only Oriya (`or`) is left out of the Google map.
 
 Locale support manages your copy; it does not translate it automatically. Missing text falls back to English, then the first available translation. The editor interface currently contains English and Turkish labels.
 
@@ -58,12 +58,13 @@ Commit `app-store-screenshots.json` and any referenced files under `public/` tog
 
 ```bash
 npm run build:deck # OVERWRITES current project with examples/starter.json
+npm run test:locales
 npm run typecheck
 npm run build
 npm start
 ```
 
-`public/mockup.png` is the iPhone frame overlay; its screen measurements live in `PHONE_SCREEN` in `constants.ts`. Keep these synchronized if you replace the frame. Google fonts are fetched during the build.
+`public/mockup.png` is the iPhone frame overlay; its screen measurements live in `PHONE_SCREEN` in `constants.ts`. Keep these synchronized if you replace the frame. Google fonts are fetched during the build. `npm run test:locales` checks locale coverage and platform-code mappings against the official supported-code lists.
 
 ## Persistence and migration
 
